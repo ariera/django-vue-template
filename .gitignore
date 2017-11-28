@@ -29,3 +29,6 @@ local_settings.py
 db.sqlite3
 
 
+webpack-stats.json
+public/
+dist/
