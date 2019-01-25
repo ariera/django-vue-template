@@ -1,8 +1,8 @@
 {
   "name": "django-vue-template",
   "version": "1.0.0",
-  "description": "A Vue.js and Django example",
-  "author": "Alejandro Riera <info@ariera.net>",
+  "description": "A Vue.js and Django template",
+  "author": "Code Master <codemaster08240328@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
