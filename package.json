@@ -1,8 +1,8 @@
 {
   "name": "django-vue-template",
   "version": "1.0.0",
-  "description": "A Vue.js and Django example",
-  "author": "Alejandro Riera <info@ariera.net>",
+  "description": "A Vue.js and Django template",
+  "author": "Code Master <codemaster08240328@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,8 +14,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "config": "1.30.0",
+    "fs": "0.0.2",
+    "jwt-decode": "^2.2.0",
+    "os": "0.1.1",
+    "path": "0.12.7",
+    "util": "0.11.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-axios": "^2.1.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
