@@ -1,12 +1,12 @@
-import Vue from 'vue';
+import Vue from "vue";
 
-import axios from 'axios';
-import VueAxios from 'vue-axios';
+import axios from "axios";
+import VueAxios from "vue-axios";
 
-import { authHeader } from '../_helpers';
+import { authHeader } from "../_helpers";
 
 /* eslint-disable camelcase */
-import { auth_url } from './api.config';
+import { auth_url } from "./api.config";
 
 Vue.use(VueAxios, axios);
 
@@ -16,7 +16,7 @@ export const userService = {
   getAll
 };
 
-function login (username, password) {
+function login(username, password) {
   const payload = {
     username,
     password
@@ -26,7 +26,7 @@ function login (username, password) {
     const { data } = result;
     if (data.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data.user));
     }
     return data.user;
   });
@@ -44,34 +44,16 @@ function login (username, password) {
   //   });
 }
 
-function logout () {
+function logout() {
   // remove user from local storage to log user out
-  localStorage.removeItem('user');
+  localStorage.removeItem("user");
 }
 
-function getAll () {
+function getAll() {
   const requestOptions = {
-    method: 'GET',
+    method: "GET",
     headers: authHeader()
   };
 
   return fetch(`/users`, requestOptions).then(handleResponse);
-}
-
-function handleResponse (response) {
-  return response.text().then(text => {
-    const data = text && JSON.parse(text);
-    if (!response.ok) {
-      if (response.status === 401) {
-        // auto logout if 401 response returned from api
-        logout();
-        location.reload(true);
-      }
-
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
-    }
-
-    return data;
-  });
 }
