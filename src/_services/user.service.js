@@ -1,4 +1,14 @@
+import Vue from 'vue';
+
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
 import { authHeader } from '../_helpers';
+
+/* eslint-disable camelcase */
+import { auth_url } from './api.config';
+
+Vue.use(VueAxios, axios);
 
 export const userService = {
   login,
@@ -7,23 +17,31 @@ export const userService = {
 };
 
 function login (username, password) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+  const payload = {
+    username,
+    password
   };
+  return axios.post(`${auth_url}/obtain_token/`, payload).then(result => {
+    // login successful if there's a jwt token in the response
+    const { data } = result;
+    if (data.token) {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('user', JSON.stringify(data.user));
+    }
+    return data.user;
+  });
 
-  return fetch(`/users/authenticate`, requestOptions)
-    .then(handleResponse)
-    .then(user => {
-      // login successful if there's a jwt token in the response
-      if (user.token) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user));
-      }
+  // return fetch(`${auth_url}/obtain_token/`, requestOptions)
+  //   .then(handleResponse)
+  //   .then(user => {
+  //     // login successful if there's a jwt token in the response
+  //     if (user.token) {
+  //       // store user details and jwt token in local storage to keep user logged in between page refreshes
+  //       localStorage.setItem('user', JSON.stringify(user));
+  //     }
 
-      return user;
-    });
+  //     return user;
+  //   });
 }
 
 function logout () {

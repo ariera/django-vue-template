@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Hi {{user.firstName}}!</h1>
+    <h1>Hi {{user.username}}!</h1>
     <p>You're logged in with Vue + Vuex & JWT!!</p>
     <h3>Users from secure api end point:</h3>
     <em v-if="users.loading">Loading users...</em>
     <span v-if="users.error" class="text-danger">ERROR: {{users.error}}</span>
     <ul v-if="users.items">
-      <li v-for="user in users.items" :key="user.id">{{user.firstName + ' ' + user.lastName}}</li>
+      <li v-for="user in users.items" :key="user.id">{{user.first_name + ' ' + user.last_name}}</li>
     </ul>
     <p>
       <router-link to="/login">Logout</router-link>
